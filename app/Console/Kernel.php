@@ -12,7 +12,6 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // כאן תוכל להוסיף את הפקודה שלך
         $schedule->command('fetch:external-posts')->daily();
     }
 

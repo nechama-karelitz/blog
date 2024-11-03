@@ -11,7 +11,7 @@ class ExternalApiController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function fetchPosts()
+    public function fetchPosts(): \Illuminate\View\View
     {
         // Retrieve the API URL from the .env file
         $apiUrl = env('EXTERNAL_API_URL', 'https://jsonplaceholder.typicode.com/posts');
