@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'All Posts')
+
 @section('content')
     <div class="container">
         <h1 class="mb-4">All Posts</h1>
@@ -16,12 +18,17 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ $post->title }}</h5>
                         <p class="card-text">{{ Str::limit($post->content, 150) }}</p>
-                        <p class="card-text"><small class="text-muted">Published on {{ $post->publish_date->format('d/m/Y') }}</small></p>
+                        <p class="card-text">
+                            <small class="text-muted">
+                                Published on {{ $post->publish_date ? $post->publish_date->format('d/m/Y') : 'Date not available' }}
+                            </small>
+                        </p>
                         <a href="{{ route('posts.show', $post->id) }}" class="btn btn-link">View Post</a>
+                        
                         <!-- Show Edit and Delete buttons only if the user is authenticated -->
                         @auth
                             <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-link">Edit Post</a>
-                            <form action="{{ route('posts.destroy', $post->id) }}" method="POST" class="d-inline">
+                            <form action="{{ route('posts.destroy', $post->id) }}" method="POST" class="d-inline ms-2">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-link text-danger" onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>

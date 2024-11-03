@@ -9,10 +9,19 @@ class Post extends Model
 {
     use HasFactory;
 
-    // Allow mass assignment on these fields
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<string>
+     */
     protected $fillable = ['title', 'content', 'publish_date'];
 
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array<string, string>
+     */
     protected $casts = [
-        'publish_date' => 'datetime',
+        'publish_date' => 'datetime', // Ensure publish_date is treated as a datetime instance
     ];
 }

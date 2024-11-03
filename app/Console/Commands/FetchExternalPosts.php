@@ -24,15 +24,17 @@ class FetchExternalPosts extends Command
 
     /**
      * Execute the console command.
+     * Fetches posts from an external API and saves new posts to the database.
      *
-     * @return int
+     * @return int Command::SUCCESS if successful, or Command::FAILURE on error.
      */
-    public function handle()
+    public function handle(): int
     {
         $this->info('Fetching posts from external API...');
 
         // Fetch posts from the external API
-        $response = Http::withoutVerifying()->get('https://jsonplaceholder.typicode.com/posts');
+        $apiUrl = env('EXTERNAL_API_URL', 'https://jsonplaceholder.typicode.com/posts');
+        $response = Http::withoutVerifying()->get($apiUrl);
 
         if ($response->successful()) {
             $posts = $response->json();
@@ -52,6 +54,7 @@ class FetchExternalPosts extends Command
             $this->info('Posts fetched and saved successfully.');
         } else {
             $this->error('Failed to fetch posts from external API.');
+            return Command::FAILURE;
         }
 
         return Command::SUCCESS;
