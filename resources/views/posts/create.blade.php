@@ -1,16 +1,15 @@
-<!-- resources/views/posts/create.blade.php -->
-<h1>Create New Post</h1>
+@extends('layouts.app')
 
-<form method="POST" action="{{ route('posts.store') }}">
-    @csrf
-    <label for="title">Title:</label>
-    <input type="text" id="title" name="title" required>
-
-    <label for="content">Content:</label>
-    <textarea id="content" name="content" required></textarea>
-
-    <label for="publish_date">Publish Date:</label>
-    <input type="date" id="publish_date" name="publish_date">
-
-    <button type="submit">Create Post</button>
-</form>
+@section('content')
+    <div class="container">
+        <h1>Create New Post</h1>
+        
+        <!-- Form for creating a new post -->
+        <form action="{{ route('posts.store') }}" method="POST">
+            @include('posts._form') <!-- Include the partial form here -->
+            
+            <button type="submit" class="btn btn-primary me-2">Save Post</button>
+            <a href="{{ route('posts.index') }}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+@endsection

@@ -1,12 +1,10 @@
-<!-- resources/views/posts/show.blade.php -->
-<h1>{{ $post->title }}</h1>
-<p>{{ $post->content }}</p>
-<p><small>Published on {{ $post->publish_date->format('d/m/Y') }}</small></p>
+@extends('layouts.app')
 
-<a href="{{ route('posts.edit', $post->id) }}">Edit Post</a>
-
-<form method="POST" action="{{ route('posts.destroy', $post->id) }}">
-    @csrf
-    @method('DELETE')
-    <button type="submit">Delete Post</button>
-</form>
+@section('content')
+    <div class="container">
+        <h1>{{ $post->title }}</h1>
+        <p>{!! nl2br(e($post->content)) !!}</p>
+        <p><small class="text-muted">Published on {{ $post->publish_date->format('d/m/Y') }}</small></p>
+        <a href="{{ route('posts.index') }}" class="btn btn-secondary mt-3">Back to Posts</a>
+    </div>
+@endsection
